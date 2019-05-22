@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6yp-FH-Gnr">
-                                <rect key="frame" x="0.0" y="144" width="414" height="718"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="noteCell" rowHeight="96" id="w6g-Kt-89A" customClass="NoteCell" customModule="EvoSummerMobileLabTestTask" customModuleProvider="target">
@@ -71,29 +71,29 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="DOS-7W-mgU">
-                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="DOS-7W-mgU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6YG-Ms-KR0"/>
-                            <constraint firstItem="6yp-FH-Gnr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="B7X-K7-QVQ"/>
-                            <constraint firstItem="6yp-FH-Gnr" firstAttribute="top" secondItem="DOS-7W-mgU" secondAttribute="bottom" id="CNp-yg-2o2"/>
-                            <constraint firstItem="DOS-7W-mgU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UcR-nj-2s5"/>
-                            <constraint firstItem="DOS-7W-mgU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="kHS-5a-BSZ"/>
-                            <constraint firstItem="6yp-FH-Gnr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="kkw-4X-PJf"/>
-                            <constraint firstItem="6yp-FH-Gnr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="orA-Pr-Z5Y"/>
+                            <constraint firstItem="6yp-FH-Gnr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1dc-Vw-gFC"/>
+                            <constraint firstItem="6yp-FH-Gnr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="J30-qy-9Bk"/>
+                            <constraint firstItem="6yp-FH-Gnr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OhY-Fs-aeo"/>
+                            <constraint firstItem="6yp-FH-Gnr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="u6C-KD-nKe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Notes" id="i7q-am-e5D">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="YB1-cN-tJR">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="BYZ-38-t0r" id="rRJ-DG-yWp"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="YB1-cN-tJR">
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="BYZ-38-t0r" id="rRJ-DG-yWp"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="Webp.net-resizeimage-2" id="kSv-dx-3O0">
+                                <connections>
+                                    <action selector="sortButtonPressed:" destination="BYZ-38-t0r" id="44C-cc-vsD"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="notesTable" destination="6yp-FH-Gnr" id="EtU-w9-zfY"/>
@@ -112,24 +112,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDx-NO-jeo">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDx-NO-jeo">
+                                <rect key="frame" x="8" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="RDx-NO-jeo" firstAttribute="trailing" secondItem="lmD-QK-d9u" secondAttribute="trailing" id="NH6-Fq-ucd"/>
-                            <constraint firstItem="RDx-NO-jeo" firstAttribute="bottom" secondItem="lmD-QK-d9u" secondAttribute="bottom" id="YPb-Ps-SKb"/>
-                            <constraint firstItem="RDx-NO-jeo" firstAttribute="leading" secondItem="lmD-QK-d9u" secondAttribute="leading" id="cFa-vA-kcb"/>
-                            <constraint firstItem="RDx-NO-jeo" firstAttribute="top" secondItem="lmD-QK-d9u" secondAttribute="top" id="iIi-cS-br8"/>
+                            <constraint firstItem="RDx-NO-jeo" firstAttribute="height" secondItem="lmD-QK-d9u" secondAttribute="height" id="BX8-9U-jco"/>
+                            <constraint firstItem="RDx-NO-jeo" firstAttribute="bottom" secondItem="lmD-QK-d9u" secondAttribute="bottom" id="DQG-LX-KOf"/>
+                            <constraint firstItem="RDx-NO-jeo" firstAttribute="leading" secondItem="lmD-QK-d9u" secondAttribute="leading" constant="8" id="afY-sa-pBr"/>
+                            <constraint firstItem="RDx-NO-jeo" firstAttribute="top" secondItem="lmD-QK-d9u" secondAttribute="top" id="dei-bo-P9A"/>
+                            <constraint firstItem="RDx-NO-jeo" firstAttribute="trailing" secondItem="lmD-QK-d9u" secondAttribute="trailing" constant="8" id="mTk-0g-b6J"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lmD-QK-d9u"/>
                     </view>
                     <navigationItem key="navigationItem" id="QW5-zJ-qZN"/>
                     <connections>
+                        <outlet property="heightConstraint" destination="BX8-9U-jco" id="pPQ-9J-eo8"/>
                         <outlet property="noteText" destination="RDx-NO-jeo" id="bbO-Bu-Zs0"/>
                     </connections>
                 </viewController>
@@ -156,4 +157,7 @@
             <point key="canvasLocation" x="295.6521739130435" y="758.70535714285711"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Webp.net-resizeimage-2" width="30" height="30"/>
+    </resources>
 </document>

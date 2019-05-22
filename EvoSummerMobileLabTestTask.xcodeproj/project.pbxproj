@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		7A43A26BD2BA90212DCCCE9A /* Pods_EvoSummerMobileLabTestTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1EEDC0387B0B9A33E2F246 /* Pods_EvoSummerMobileLabTestTask.framework */; };
+		E05E4EDE22940CAC00AB0138 /* ActivityAlertPresenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05E4EDD22940CAC00AB0138 /* ActivityAlertPresenterManager.swift */; };
+		E05E4EE2229458E500AB0138 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E05E4EE1229458E500AB0138 /* Assets.xcassets */; };
 		E09F2DD0229133D500A044DD /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09F2DCF229133D500A044DD /* Note.swift */; };
 		E09F2DD22291788000A044DD /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09F2DD12291788000A044DD /* RealmManager.swift */; };
 		E0A7CF4E228CA0D200327F39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7CF4D228CA0D200327F39 /* AppDelegate.swift */; };
 		E0A7CF50228CA0D200327F39 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7CF4F228CA0D200327F39 /* NotesViewController.swift */; };
 		E0A7CF53228CA0D200327F39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0A7CF51228CA0D200327F39 /* Main.storyboard */; };
-		E0A7CF55228CA0D800327F39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0A7CF54228CA0D800327F39 /* Assets.xcassets */; };
 		E0A7CF58228CA0D800327F39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0A7CF56228CA0D800327F39 /* LaunchScreen.storyboard */; };
 		E0A7CF62228DBE9E00327F39 /* NoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7CF61228DBE9E00327F39 /* NoteDetailViewController.swift */; };
 		E0A7CF64228DDA3E00327F39 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7CF63228DDA3E00327F39 /* NoteCell.swift */; };
@@ -22,13 +23,14 @@
 /* Begin PBXFileReference section */
 		9F1EEDC0387B0B9A33E2F246 /* Pods_EvoSummerMobileLabTestTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvoSummerMobileLabTestTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCBD227C8F9016E720BE696D /* Pods-EvoSummerMobileLabTestTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoSummerMobileLabTestTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoSummerMobileLabTestTask/Pods-EvoSummerMobileLabTestTask.release.xcconfig"; sourceTree = "<group>"; };
+		E05E4EDD22940CAC00AB0138 /* ActivityAlertPresenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAlertPresenterManager.swift; sourceTree = "<group>"; };
+		E05E4EE1229458E500AB0138 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E09F2DCF229133D500A044DD /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		E09F2DD12291788000A044DD /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		E0A7CF4A228CA0D200327F39 /* EvoSummerMobileLabTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoSummerMobileLabTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0A7CF4D228CA0D200327F39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0A7CF4F228CA0D200327F39 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		E0A7CF52228CA0D200327F39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E0A7CF54228CA0D800327F39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0A7CF57228CA0D800327F39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0A7CF59228CA0D800327F39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0A7CF61228DBE9E00327F39 /* NoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailViewController.swift; sourceTree = "<group>"; };
@@ -92,8 +94,9 @@
 				E0A7CF4D228CA0D200327F39 /* AppDelegate.swift */,
 				E09F2DCF229133D500A044DD /* Note.swift */,
 				E0A7CF4F228CA0D200327F39 /* NotesViewController.swift */,
+				E05E4EDD22940CAC00AB0138 /* ActivityAlertPresenterManager.swift */,
+				E05E4EE1229458E500AB0138 /* Assets.xcassets */,
 				E0A7CF51228CA0D200327F39 /* Main.storyboard */,
-				E0A7CF54228CA0D800327F39 /* Assets.xcassets */,
 				E0A7CF56228CA0D800327F39 /* LaunchScreen.storyboard */,
 				E0A7CF59228CA0D800327F39 /* Info.plist */,
 			);
@@ -161,7 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0A7CF58228CA0D800327F39 /* LaunchScreen.storyboard in Resources */,
-				E0A7CF55228CA0D800327F39 /* Assets.xcassets in Resources */,
+				E05E4EE2229458E500AB0138 /* Assets.xcassets in Resources */,
 				E0A7CF53228CA0D200327F39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0A7CF50228CA0D200327F39 /* NotesViewController.swift in Sources */,
+				E05E4EDE22940CAC00AB0138 /* ActivityAlertPresenterManager.swift in Sources */,
 				E09F2DD0229133D500A044DD /* Note.swift in Sources */,
 				E0A7CF4E228CA0D200327F39 /* AppDelegate.swift in Sources */,
 				E0A7CF62228DBE9E00327F39 /* NoteDetailViewController.swift in Sources */,

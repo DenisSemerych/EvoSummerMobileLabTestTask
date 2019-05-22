@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         do {
-            let realm = try Realm()
+            _ = try Realm()
         } catch {
             fatalError("Coudn`t load Realm")
         }
