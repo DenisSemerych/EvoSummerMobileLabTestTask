@@ -40,8 +40,13 @@ class NoteDetailViewController: UIViewController {
         //removing keyboard observers
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        //MARK: - uncoment lines if you need to enable saving data when poping self
+//        if note != nil {
+//            if noteText.text != note!.text {
+//               _ = !RealmManager.shared.updateNote(note: note!, withText: noteText.text)
+//            }
+//        }
     }
-    
 }
 
 
@@ -67,19 +72,22 @@ extension NoteDetailViewController {
         if !RealmManager.shared.updateNote(note: note!, withText: noteText.text) {
                ActivityAlertPresenterController.shared.presentAlert(delegate: self, withMessage: "Error in updating note", title: "Realm Error")
         }
-        changeButtonToEdit()
+        turnOffEditonMode()
     }
     
     @objc func cancelEditionButtonPressed() {
-        changeButtonToEdit()
+        turnOffEditonMode()
     }
     
-    func changeButtonToEdit() {
-        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(edit))
-        self.navigationItem.rightBarButtonItem = editButton
-        //edition mode disabled
+    func turnOffEditonMode() {
+        changeBarButtonToEdit()
         noteText.resignFirstResponder()
         noteText.isEditable = false
+    }
+    
+    func changeBarButtonToEdit() {
+        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(edit))
+        self.navigationItem.rightBarButtonItem = editButton
     }
     
     @objc func sharedButtonPressed() {
