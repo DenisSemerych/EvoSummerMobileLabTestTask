@@ -47,7 +47,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71W-GO-s09">
-                                                    <rect key="frame" x="20" y="64.5" width="348" height="20.5"/>
+                                                    <rect key="frame" x="20" y="34.5" width="348" height="50.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                                                 <constraint firstItem="71W-GO-s09" firstAttribute="bottom" secondItem="m8r-BC-kEk" secondAttribute="bottomMargin" id="WZr-qC-BOW"/>
                                                 <constraint firstItem="WNZ-pg-rlg" firstAttribute="leading" secondItem="m8r-BC-kEk" secondAttribute="leading" constant="20" id="d5z-Sf-glg"/>
                                                 <constraint firstAttribute="trailing" secondItem="WNZ-pg-rlg" secondAttribute="trailing" constant="20" id="gRg-se-5gZ"/>
-                                                <constraint firstItem="71W-GO-s09" firstAttribute="top" secondItem="WNZ-pg-rlg" secondAttribute="bottom" constant="40" id="hBm-xY-g9g"/>
+                                                <constraint firstItem="71W-GO-s09" firstAttribute="top" secondItem="WNZ-pg-rlg" secondAttribute="bottom" constant="10" id="hBm-xY-g9g"/>
                                                 <constraint firstItem="WNZ-pg-rlg" firstAttribute="top" secondItem="m8r-BC-kEk" secondAttribute="top" constant="7.5" id="zZm-52-C2b"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -113,18 +113,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDx-NO-jeo">
-                                <rect key="frame" x="8" y="88" width="414" height="774"/>
+                                <rect key="frame" x="10" y="88" width="394" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="RDx-NO-jeo" firstAttribute="height" secondItem="lmD-QK-d9u" secondAttribute="height" id="BX8-9U-jco"/>
-                            <constraint firstItem="RDx-NO-jeo" firstAttribute="bottom" secondItem="lmD-QK-d9u" secondAttribute="bottom" id="DQG-LX-KOf"/>
-                            <constraint firstItem="RDx-NO-jeo" firstAttribute="leading" secondItem="lmD-QK-d9u" secondAttribute="leading" constant="8" id="afY-sa-pBr"/>
+                            <constraint firstItem="RDx-NO-jeo" firstAttribute="leading" secondItem="lmD-QK-d9u" secondAttribute="leading" constant="10" id="afY-sa-pBr"/>
                             <constraint firstItem="RDx-NO-jeo" firstAttribute="top" secondItem="lmD-QK-d9u" secondAttribute="top" id="dei-bo-P9A"/>
-                            <constraint firstItem="RDx-NO-jeo" firstAttribute="trailing" secondItem="lmD-QK-d9u" secondAttribute="trailing" constant="8" id="mTk-0g-b6J"/>
+                            <constraint firstItem="lmD-QK-d9u" firstAttribute="trailing" secondItem="RDx-NO-jeo" secondAttribute="trailing" constant="10" id="mTk-0g-b6J"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lmD-QK-d9u"/>
                     </view>

@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class NotesViewController: UIViewController {
+class NotesViewController: UIViewController, UINavigationBarDelegate {
 
     @IBOutlet weak var notesTable: UITableView!
     let searchController = UISearchController(searchResultsController: nil)
@@ -23,6 +23,7 @@ class NotesViewController: UIViewController {
             self.notesTable.reloadData()
         }
     }
+    private var lastSort: (property: String, ascending: Bool)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +50,7 @@ class NotesViewController: UIViewController {
     
     
     @IBAction func sortButtonPressed(_ sender: UIBarButtonItem) {
-        ActivityAlertPresenterManager.shared.presentActivityShieldForSorting(delegate: self)
+        ActivityAlertPresenterController.shared.presentActivityShieldForSorting(delegate: self)
     }
     
     //MARK: - Prepeare for segue function
@@ -58,6 +59,7 @@ class NotesViewController: UIViewController {
         if  sender.self is UIBarButtonItem {
             //case where we adding new note is shecking by asking type of sender
             let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: destVC, action: #selector(destVC.saveNewNoteButtonPressed))
+            saveButton.isEnabled = false
             destVC.navigationItem.rightBarButtonItem = saveButton
         } else {
             //else we on editing/detail screen
@@ -89,8 +91,9 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell") as! NoteCell
         let note = searchController.isActive ? searchResults?[indexPath.row] : notes?[indexPath.row]
-        cell.date.text = note?.date.description(with: Locale.autoupdatingCurrent)
-        cell.time.text = note?.date.description(with: Locale.autoupdatingCurrent)
+        let date = formate(date: note?.date)
+        cell.date.text = date.day
+        cell.time.text = "\(date.hour):" + (date.minutes < 10 ? "0\(date.minutes)" : "\(date.minutes)")
         cell.noteText.text = note?.text.tuncateIfNeeded().withoutNewLine()
         return cell
     }
@@ -98,12 +101,17 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") {
             [unowned self] action, index in
-            guard let note = self.searchController.isActive ? self.searchResults?[index.row] : self.notes?[index.row] else {//present alert
+            guard let note = self.searchController.isActive ? self.searchResults?[index.row] : self.notes?[index.row] else {
+                   ActivityAlertPresenterController.shared.presentAlert(delegate: self, withMessage: "Error in updating TableView", title: "App Error")
                 return}
             if !RealmManager.shared.delete(note: note) {
-                //present alert
+                   ActivityAlertPresenterController.shared.presentAlert(delegate: self, withMessage: "Error in deleting note", title: "Realm Error")
             }
-            self.notes = RealmManager.shared.fetchNotes()
+            if let lastSort = self.lastSort {
+                 self.notes = RealmManager.shared.fetchNotes().sorted(byKeyPath: lastSort.property, ascending: lastSort.ascending)
+            } else {
+                self.notes = RealmManager.shared.fetchNotes()
+            }
         }
         let edit = UITableViewRowAction(style: .normal, title: "Edit") {[unowned self] action, index in
             self.performSegue(withIdentifier: "goToNoteDetail", sender: index)
@@ -136,6 +144,7 @@ extension NotesViewController {
         } else {
             notes = notes?.sorted(byKeyPath: property, ascending: ascending)
         }
+        lastSort = (property, ascending)
     }
 }
 
@@ -154,3 +163,13 @@ extension String {
     }
 }
 
+extension NotesViewController {
+    func formate(date: Date?)->(hour: Int, minutes: Int, day: String) {
+        let hour = Calendar.current.component(.hour, from: date!)
+        let minutes =  Calendar.current.component(.minute, from: date!)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yy"
+        let date = formatter.string(from: date!)
+        return (hour, minutes, date)
+    }
+}
