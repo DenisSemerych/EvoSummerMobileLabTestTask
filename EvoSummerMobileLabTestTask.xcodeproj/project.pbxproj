@@ -12,6 +12,7 @@
 		E05E4EE2229458E500AB0138 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E05E4EE1229458E500AB0138 /* Assets.xcassets */; };
 		E09F2DD0229133D500A044DD /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09F2DCF229133D500A044DD /* Note.swift */; };
 		E09F2DD22291788000A044DD /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09F2DD12291788000A044DD /* RealmManager.swift */; };
+		E0A1FC492297021E005E8E99 /* BarButtonsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A1FC482297021E005E8E99 /* BarButtonsFactory.swift */; };
 		E0A7CF4E228CA0D200327F39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7CF4D228CA0D200327F39 /* AppDelegate.swift */; };
 		E0A7CF50228CA0D200327F39 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7CF4F228CA0D200327F39 /* NotesViewController.swift */; };
 		E0A7CF53228CA0D200327F39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0A7CF51228CA0D200327F39 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 		E05E4EE1229458E500AB0138 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E09F2DCF229133D500A044DD /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		E09F2DD12291788000A044DD /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		E0A1FC482297021E005E8E99 /* BarButtonsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BarButtonsFactory.swift; path = /Users/denissemerych/EvoSummerMobileLabTestTask/EvoSummerMobileLabTestTask/Model/BarButtonsFactory.swift; sourceTree = "<absolute>"; };
 		E0A7CF4A228CA0D200327F39 /* EvoSummerMobileLabTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoSummerMobileLabTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0A7CF4D228CA0D200327F39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0A7CF4F228CA0D200327F39 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		E0AE62902296057E0096D4DF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E0A1FC482297021E005E8E99 /* BarButtonsFactory.swift */,
 				E09F2DCF229133D500A044DD /* Note.swift */,
 				E09F2DD12291788000A044DD /* RealmManager.swift */,
 			);
@@ -255,6 +258,7 @@
 				E0A7CF4E228CA0D200327F39 /* AppDelegate.swift in Sources */,
 				E0A7CF62228DBE9E00327F39 /* NoteDetailViewController.swift in Sources */,
 				E0A7CF64228DDA3E00327F39 /* NoteCell.swift in Sources */,
+				E0A1FC492297021E005E8E99 /* BarButtonsFactory.swift in Sources */,
 				E09F2DD22291788000A044DD /* RealmManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

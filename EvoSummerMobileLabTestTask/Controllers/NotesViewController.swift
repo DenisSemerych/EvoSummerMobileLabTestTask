@@ -15,12 +15,12 @@ class NotesViewController: UIViewController, UINavigationBarDelegate {
     let searchController = UISearchController(searchResultsController: nil)
     var notes: Results<Note>? {
         didSet {
-            self.notesTable.reloadData()
+            notesTable.reloadData()
         }
     }
     var searchResults : Results<Note>? {
         didSet {
-            self.notesTable.reloadData()
+            notesTable.reloadData()
         }
     }
     private var lastSort: (property: String, ascending: Bool)?
@@ -30,6 +30,10 @@ class NotesViewController: UIViewController, UINavigationBarDelegate {
         definesPresentationContext = true
         notesTable.delegate = self
         notesTable.dataSource = self
+        notesTable.rowHeight = UITableView.automaticDimension
+        notesTable.estimatedRowHeight = 44.0
+        //seting up search controller that is hidden in navigation item, on swipe down it will shows up
+
         searchController.searchResultsUpdater = self
         searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.placeholder = "Search"
@@ -58,13 +62,13 @@ class NotesViewController: UIViewController, UINavigationBarDelegate {
         let destVC = segue.destination as! NoteDetailViewController
         if  sender.self is UIBarButtonItem {
             //case where we adding new note is shecking by asking type of sender
-            let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: destVC, action: #selector(destVC.saveNewNoteButtonPressed))
+            let saveButton = BarButtonsFactory.createButton(buttonType: .save, with: #selector(destVC.saveNewNoteButtonPressed), for: destVC)
             saveButton.isEnabled = false
             destVC.navigationItem.rightBarButtonItem = saveButton
         } else {
             //else we on editing/detail screen
-            let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: destVC, action: #selector(destVC.edit))
-            let shareButton = UIBarButtonItem(title: "Share", style: .plain, target: destVC, action: #selector(destVC.sharedButtonPressed))
+            let editButton = BarButtonsFactory.createButton(buttonType: .edit, with: #selector(destVC.edit), for: destVC)
+            let shareButton = BarButtonsFactory.createButton(buttonType: .share, with: #selector(destVC.sharedButtonPressed), for: destVC)
             destVC.navigationItem.rightBarButtonItems = [editButton, shareButton]
             if let index = sender as? Int {
                 //this part is working if we come from didSelectRowAtIndexPath
@@ -76,8 +80,6 @@ class NotesViewController: UIViewController, UINavigationBarDelegate {
             }
         } 
     }
-    
-    
 }
 
 //MARK: - TableViewMethods
@@ -165,7 +167,7 @@ extension String {
 }
 
 extension NotesViewController {
-    func formate(date: Date?)->(hour: Int, minutes: Int, day: String) {
+   private func formate(date: Date?)->(hour: Int, minutes: Int, day: String) {
         let hour = Calendar.current.component(.hour, from: date!)
         let minutes =  Calendar.current.component(.minute, from: date!)
         let formatter = DateFormatter()

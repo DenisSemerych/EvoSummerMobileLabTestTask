@@ -12,7 +12,7 @@ class NoteDetailViewController: UIViewController {
 
     var note: Note?
     var shoudEdit = false
-    private var saved = false
+    private var isTextSaved = false
     
     @IBOutlet weak var noteText: UITextView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
@@ -26,7 +26,11 @@ class NoteDetailViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+           noteText.text = note?.text
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         setupDisplayMode()
     }
     
@@ -45,18 +49,24 @@ class NoteDetailViewController: UIViewController {
 extension NoteDetailViewController {
     
     @objc func saveNewNoteButtonPressed() {
-        if !RealmManager.shared.saveNote(withText: noteText.text!) {
-             ActivityAlertPresenterController.shared.presentAlert(delegate: self, withMessage: "Error in saving", title: "Realm Error")
+        if let note = RealmManager.shared.saveNote(withText: noteText.text!) {
+            self.note = note
+            isTextSaved = true
+            let editButton = BarButtonsFactory.createButton(buttonType: .edit, with: #selector(edit), for: self)
+            let shareButton = BarButtonsFactory.createButton(buttonType: .share, with: #selector(sharedButtonPressed), for: self)
+            navigationItem.rightBarButtonItems = [editButton, shareButton]
+            noteText.isEditable = false
+        } else {
+            ActivityAlertPresenterController.shared.presentAlert(delegate: self, withMessage: "Error in saving", title: "Realm Error")
         }
-        saved = true
-        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func edit() {
         noteText.isEditable = true
         //change button to cancel edition
-        let cancelEditionButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelEditionButtonPressed))
-        self.navigationItem.rightBarButtonItem = cancelEditionButton
+        let cancelEditionButton = BarButtonsFactory.createButton(buttonType: .cancel, with: #selector(cancelEditionButtonPressed), for: self)
+        navigationItem.rightBarButtonItem = cancelEditionButton
+        isTextSaved = false
         noteText.becomeFirstResponder()
     }
     
@@ -64,7 +74,7 @@ extension NoteDetailViewController {
         if !RealmManager.shared.updateNote(note: note!, withText: noteText.text) {
                ActivityAlertPresenterController.shared.presentAlert(delegate: self, withMessage: "Error in updating note", title: "Realm Error")
         }
-        saved = true
+        isTextSaved = true
         turnOffEditonMode()
     }
     
@@ -79,8 +89,8 @@ extension NoteDetailViewController {
     }
     
     func changeBarButtonToEdit() {
-        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(edit))
-        self.navigationItem.rightBarButtonItem = editButton
+        let editButton = BarButtonsFactory.createButton(buttonType: .edit, with: #selector(edit), for: self)
+        navigationItem.rightBarButtonItem = editButton
     }
     
     @objc func sharedButtonPressed() {
@@ -91,7 +101,7 @@ extension NoteDetailViewController {
 //MARK: - Saving Text on exit && changing input mode setup
 extension NoteDetailViewController {
     func saveTextIfNeeded() {
-        if !saved && noteText.text != note?.text {
+        if !isTextSaved && noteText.text != note?.text && !noteText.text.isEmpty {
             if note != nil  {
                 _ = RealmManager.shared.updateNote(note: note!, withText: noteText.text)
             } else {
@@ -101,13 +111,14 @@ extension NoteDetailViewController {
     }
     
     func setupDisplayMode() {
-        if note != nil {
+        if note != nil && !shoudEdit {
             noteText.isEditable = false
-            noteText.text = note!.text
+        } else if shoudEdit {
+            edit()
         } else {
             noteText.isEditable = true
+            noteText.becomeFirstResponder()
         }
-        if shoudEdit {edit()}
     }
 }
 
@@ -150,7 +161,7 @@ extension NoteDetailViewController:  UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         //adding save button if note was edited
         if note != nil {
-            let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonPressed))
+            let saveButton = BarButtonsFactory.createButton(buttonType: .save, with: #selector(saveButtonPressed), for: self)
             self.navigationItem.rightBarButtonItem = saveButton
         }
         //switching save button to prevent saving empty notes

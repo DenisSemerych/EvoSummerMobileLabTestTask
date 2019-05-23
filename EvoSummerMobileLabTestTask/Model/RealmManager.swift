@@ -27,7 +27,7 @@ final class RealmManager {
         return true
     }
     
-    public func saveNote(withText text: String) -> Bool {
+    public func saveNote(withText text: String) -> Note? {
         let note = Note()
         note.date = Date()
         note.text = text
@@ -36,9 +36,9 @@ final class RealmManager {
                 realm.add(note)
             }
         } catch {
-            return false
+            return nil
         }
-        return true
+        return note
     }
     
     public func delete(note: Note) -> Bool {
