@@ -27,13 +27,7 @@ class NoteDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if note != nil {
-            noteText.isEditable = false
-            noteText.text = note!.text
-        } else {
-            noteText.isEditable = true
-        }
-        if shoudEdit {edit()}
+        setupDisplayMode()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -92,16 +86,28 @@ extension NoteDetailViewController {
     @objc func sharedButtonPressed() {
         ActivityAlertPresenterController.shared.presentActivityVC(delegate: self, items: [noteText.text!])
     }
-    
-    //MARK: - Saving Text on exit
+}
+
+//MARK: - Saving Text on exit && changing input mode setup
+extension NoteDetailViewController {
     func saveTextIfNeeded() {
         if !saved && noteText.text != note?.text {
             if note != nil  {
-               _ = RealmManager.shared.updateNote(note: note!, withText: noteText.text)
+                _ = RealmManager.shared.updateNote(note: note!, withText: noteText.text)
             } else {
                 _ = RealmManager.shared.saveNote(withText: noteText.text)
             }
         }
+    }
+    
+    func setupDisplayMode() {
+        if note != nil {
+            noteText.isEditable = false
+            noteText.text = note!.text
+        } else {
+            noteText.isEditable = true
+        }
+        if shoudEdit {edit()}
     }
 }
 
