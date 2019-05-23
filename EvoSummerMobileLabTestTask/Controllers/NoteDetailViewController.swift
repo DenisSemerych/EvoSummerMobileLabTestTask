@@ -12,6 +12,7 @@ class NoteDetailViewController: UIViewController {
 
     var note: Note?
     var shoudEdit = false
+    private var saved = false
     
     @IBOutlet weak var noteText: UITextView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
@@ -40,12 +41,8 @@ class NoteDetailViewController: UIViewController {
         //removing keyboard observers
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        //MARK: - uncoment lines if you need to enable saving data when poping self
-//        if note != nil {
-//            if noteText.text != note!.text {
-//               _ = !RealmManager.shared.updateNote(note: note!, withText: noteText.text)
-//            }
-//        }
+        //MARK: - coment next line if you need to disable saving data when poping self
+        saveTextIfNeeded()
     }
 }
 
@@ -57,6 +54,7 @@ extension NoteDetailViewController {
         if !RealmManager.shared.saveNote(withText: noteText.text!) {
              ActivityAlertPresenterController.shared.presentAlert(delegate: self, withMessage: "Error in saving", title: "Realm Error")
         }
+        saved = true
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -72,6 +70,7 @@ extension NoteDetailViewController {
         if !RealmManager.shared.updateNote(note: note!, withText: noteText.text) {
                ActivityAlertPresenterController.shared.presentAlert(delegate: self, withMessage: "Error in updating note", title: "Realm Error")
         }
+        saved = true
         turnOffEditonMode()
     }
     
@@ -92,6 +91,17 @@ extension NoteDetailViewController {
     
     @objc func sharedButtonPressed() {
         ActivityAlertPresenterController.shared.presentActivityVC(delegate: self, items: [noteText.text!])
+    }
+    
+    //MARK: - Saving Text on exit
+    func saveTextIfNeeded() {
+        if !saved && noteText.text != note?.text {
+            if note != nil  {
+               _ = RealmManager.shared.updateNote(note: note!, withText: noteText.text)
+            } else {
+                _ = RealmManager.shared.saveNote(withText: noteText.text)
+            }
+        }
     }
 }
 
