@@ -107,6 +107,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
             if !RealmManager.shared.delete(note: note) {
                    ActivityAlertPresenterController.shared.presentAlert(delegate: self, withMessage: "Error in deleting note", title: "Realm Error")
             }
+            //if items was sorted - it is resorted as it was before actions
             if let lastSort = self.lastSort {
                  self.notes = RealmManager.shared.fetchNotes().sorted(byKeyPath: lastSort.property, ascending: lastSort.ascending)
             } else {
