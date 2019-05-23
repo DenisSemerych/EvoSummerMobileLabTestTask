@@ -17,13 +17,13 @@ class NotesViewController: UIViewController, UINavigationBarDelegate {
     var notes: Results<Note>? {
         didSet {
             notesTable.reloadData()
-            if !notes!.isEmpty {sortButton.isEnabled = true} else {sortButton.isEnabled = false}
+            if notes!.count > 1 {sortButton.isEnabled = true} else {sortButton.isEnabled = false}
         }
     }
     var searchResults : Results<Note>? {
         didSet {
             notesTable.reloadData()
-            if !searchResults!.isEmpty {sortButton.isEnabled = true} else {sortButton.isEnabled = false}
+            if searchResults!.count > 1 {sortButton.isEnabled = true} else {sortButton.isEnabled = false}
         }
     }
     private var lastSort: (property: String, ascending: Bool)?
