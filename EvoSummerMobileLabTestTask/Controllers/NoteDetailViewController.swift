@@ -49,6 +49,7 @@ class NoteDetailViewController: UIViewController {
 extension NoteDetailViewController {
     
     @objc func saveNewNoteButtonPressed() {
+        
         if let note = RealmManager.shared.saveNote(withText: noteText.text!) {
             self.note = note
             isTextSaved = true
@@ -71,11 +72,11 @@ extension NoteDetailViewController {
     }
     
     @objc func saveButtonPressed() {
+        turnOffEditonMode()
         if !RealmManager.shared.updateNote(note: note!, withText: noteText.text) {
                ActivityAlertPresenterController.shared.presentAlert(delegate: self, withMessage: "Error in updating note", title: "Realm Error")
         }
         isTextSaved = true
-        turnOffEditonMode()
     }
     
     @objc func cancelEditionButtonPressed() {
@@ -161,7 +162,7 @@ extension NoteDetailViewController:  UITextViewDelegate {
             self.navigationItem.rightBarButtonItem = saveButton
         }
         //switching save button to prevent saving empty notes
-        textView.text.isEmpty ? switchSave(enabled: false) : switchSave(enabled: true)
+        textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? switchSave(enabled: false) : switchSave(enabled: true)
     }
 }
 
