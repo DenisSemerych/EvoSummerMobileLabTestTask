@@ -12,15 +12,18 @@ import RealmSwift
 class NotesViewController: UIViewController, UINavigationBarDelegate {
 
     @IBOutlet weak var notesTable: UITableView!
+    @IBOutlet weak var sortButton: UIBarButtonItem!
     let searchController = UISearchController(searchResultsController: nil)
     var notes: Results<Note>? {
         didSet {
             notesTable.reloadData()
+            if !notes!.isEmpty {sortButton.isEnabled = true} else {sortButton.isEnabled = false}
         }
     }
     var searchResults : Results<Note>? {
         didSet {
             notesTable.reloadData()
+            if !searchResults!.isEmpty {sortButton.isEnabled = true} else {sortButton.isEnabled = false}
         }
     }
     private var lastSort: (property: String, ascending: Bool)?

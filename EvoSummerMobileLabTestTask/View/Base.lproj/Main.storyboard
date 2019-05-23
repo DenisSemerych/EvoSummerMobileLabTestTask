@@ -88,7 +88,7 @@
                                     <action selector="addButtonPressed:" destination="BYZ-38-t0r" id="rRJ-DG-yWp"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="Webp.net-resizeimage-2" id="kSv-dx-3O0">
+                            <barButtonItem enabled="NO" title="Item" image="Webp.net-resizeimage-2" id="kSv-dx-3O0">
                                 <connections>
                                     <action selector="sortButtonPressed:" destination="BYZ-38-t0r" id="44C-cc-vsD"/>
                                 </connections>
@@ -97,6 +97,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="notesTable" destination="6yp-FH-Gnr" id="EtU-w9-zfY"/>
+                        <outlet property="sortButton" destination="kSv-dx-3O0" id="u1G-i7-nLd"/>
                         <segue destination="ft9-FS-JCR" kind="show" identifier="goToNoteDetail" id="ksO-bo-CMj"/>
                     </connections>
                 </viewController>

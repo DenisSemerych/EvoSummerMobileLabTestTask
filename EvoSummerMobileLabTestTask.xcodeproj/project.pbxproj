@@ -104,8 +104,8 @@
 		E0AE628F2296055F0096D4DF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E0A7CF61228DBE9E00327F39 /* NoteDetailViewController.swift */,
 				E0A7CF4F228CA0D200327F39 /* NotesViewController.swift */,
+				E0A7CF61228DBE9E00327F39 /* NoteDetailViewController.swift */,
 				E05E4EDD22940CAC00AB0138 /* ActivityAlertPresenterController.swift */,
 			);
 			path = Controllers;
