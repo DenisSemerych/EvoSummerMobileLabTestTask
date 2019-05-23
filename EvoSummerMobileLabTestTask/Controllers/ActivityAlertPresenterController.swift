@@ -28,7 +28,7 @@ final class ActivityAlertPresenterController {
         let dateDescending = UIAlertAction(title: "From new to old", style: .default) { action in
             delegate.sortNotes(by: "date", ascending: false)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(alphaAscending)
         alertController.addAction(dateAsending)
         alertController.addAction(dateDescending)
