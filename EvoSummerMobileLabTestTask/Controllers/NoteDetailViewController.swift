@@ -103,7 +103,7 @@ extension NoteDetailViewController {
 //MARK: - Saving Text on exit && changing input mode setup
 extension NoteDetailViewController {
     func saveTextIfNeeded() {
-        if !isTextSaved && noteText.text != note?.text && !noteText.text.isEmpty {
+        if !isTextSaved && noteText.text != note?.text && !noteText.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             if note != nil  {
                 _ = RealmManager.shared.updateNote(note: note!, withText: noteText.text)
             } else {
