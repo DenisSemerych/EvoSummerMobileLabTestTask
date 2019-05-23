@@ -94,6 +94,7 @@ extension NoteDetailViewController {
     }
     
     @objc func sharedButtonPressed() {
+        if noteText.isFirstResponder {noteText.resignFirstResponder()}
         ActivityAlertPresenterController.shared.presentActivityVC(delegate: self, items: [noteText.text!])
     }
 }
@@ -152,11 +153,6 @@ extension NoteDetailViewController{
 
 //MARK: - TextViewDelegate methods
 extension NoteDetailViewController:  UITextViewDelegate {
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        //disabeling share button when edition starts
-        switchShare(enabled: false)
-        return true
-    }
     
     func textViewDidChange(_ textView: UITextView) {
         //adding save button if note was edited
@@ -167,23 +163,13 @@ extension NoteDetailViewController:  UITextViewDelegate {
         //switching save button to prevent saving empty notes
         textView.text.isEmpty ? switchSave(enabled: false) : switchSave(enabled: true)
     }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        //enabeling share button when edition finished
-        switchShare(enabled: true)
-    }
 }
 
 
-//MARK: - Methods to disable/enable buttons
+//MARK: - Methods to disable/enable saveButton
 extension NoteDetailViewController {
     func switchSave(enabled: Bool) {
         let saveButton = navigationItem.rightBarButtonItems?.filter({$0.title == "Save"}).first
         saveButton?.isEnabled = enabled
-    }
-    
-    func switchShare(enabled: Bool) {
-        let shareButton = navigationItem.rightBarButtonItems?.filter({$0.title == "Share"}).first
-        shareButton?.isEnabled = enabled
     }
 }
