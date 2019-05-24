@@ -20,13 +20,13 @@ final class ActivityAlertPresenterController {
     public func presentActivityShieldForSorting(delegate: NotesViewController) {
         let alertController = UIAlertController(title: "Sort", message: nil, preferredStyle: .actionSheet)
         let alphaAscending = UIAlertAction(title: "From A..Z", style: .default) { action in
-            delegate.sortNotes(by: "text", ascending: true)
+            delegate.sortNotes(by: .text, ascending: true)
         }
         let dateAsending = UIAlertAction(title: "From old to new", style: .default) { action in
-            delegate.sortNotes(by: "date", ascending: true)
+            delegate.sortNotes(by: .date, ascending: true)
         }
         let dateDescending = UIAlertAction(title: "From new to old", style: .default) { action in
-            delegate.sortNotes(by: "date", ascending: false)
+            delegate.sortNotes(by: .date, ascending: false)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(alphaAscending)

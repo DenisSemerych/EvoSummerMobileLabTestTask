@@ -7,26 +7,25 @@
 //
 
 import UIKit
-import RealmSwift
 
 class NotesViewController: UIViewController, UINavigationBarDelegate {
 
     @IBOutlet weak var notesTable: UITableView!
     @IBOutlet weak var sortButton: UIBarButtonItem!
     let searchController = UISearchController(searchResultsController: nil)
-    var notes: Results<Note>? {
+    var notes: [Note]? {
         didSet {
             notesTable.reloadData()
             if notes!.count > 1 {sortButton.isEnabled = true} else {sortButton.isEnabled = false}
         }
     }
-    var searchResults : Results<Note>? {
+    var searchResults : [Note]? {
         didSet {
             notesTable.reloadData()
             if searchResults!.count > 1 {sortButton.isEnabled = true} else {sortButton.isEnabled = false}
         }
     }
-    private var lastSort: (property: String, ascending: Bool)?
+    private var lastSort: (property: NoteProperty, ascending: Bool)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,7 +113,8 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
             }
             //if items was sorted - it is resorted as it was before actions
             if let lastSort = self.lastSort {
-                 self.notes = RealmManager.shared.fetchNotes().sorted(byKeyPath: lastSort.property, ascending: lastSort.ascending)
+                self.notes = RealmManager.shared.fetchNotes()
+                self.sortNotes(by: lastSort.property, ascending: lastSort.ascending)
             } else {
                 self.notes = RealmManager.shared.fetchNotes()
             }
@@ -136,7 +136,9 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
 extension NotesViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text {
-            searchResults = notes?.filter("text CONTAINS[cd] %@", text)
+            searchResults = notes?.filter({ note -> Bool in
+                return note.text.contains(text)
+            })
         }
     }
 }
@@ -144,15 +146,19 @@ extension NotesViewController: UISearchResultsUpdating, UISearchBarDelegate {
 //MARK: - Sorting
 //All sorting goes here depending on choise made in ActivityVC and if it is need to sort searchResults or all notes
 extension NotesViewController {
-    func sortNotes(by property: String, ascending: Bool) {
-        if searchController.isActive {
-            searchResults = searchResults?.sorted(byKeyPath: property, ascending: ascending)
-        } else {
-            notes = notes?.sorted(byKeyPath: property, ascending: ascending)
+    func sortNotes(by property: NoteProperty, ascending: Bool) {
+        var toSort = searchController.isActive ? searchResults : notes
+        switch property {
+        case .date:
+            toSort = toSort?.sorted(by: {ascending ? $0.date > $1.date : $0.date < $1.date})
+        case .text:
+            toSort = toSort?.sorted(by: {$0.text < $1.text})
         }
+        searchController.isActive ? (searchResults = toSort) : (notes = toSort)
         lastSort = (property, ascending)
     }
 }
+
 
 //Making extension to string to return only 100 symbols truncated and replace all \n by spaces for more readable text in tableView
 extension String {
@@ -179,3 +185,6 @@ extension NotesViewController {
         return (hour, minutes, date)
     }
 }
+
+
+

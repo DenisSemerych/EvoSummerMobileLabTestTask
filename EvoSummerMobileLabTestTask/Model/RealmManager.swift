@@ -8,6 +8,10 @@
 
 import RealmSwift
 
+enum NoteProperty {
+    case date, text
+}
+
 
 final class RealmManager {
     
@@ -52,8 +56,8 @@ final class RealmManager {
         return true
     }
     
-    public func fetchNotes() -> Results<Note> {
-        return realm.objects(Note.self)
+    public func fetchNotes() -> [Note] {
+        return Array(realm.objects(Note.self))
     }
     
     private init() {}
